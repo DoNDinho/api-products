@@ -73,6 +73,38 @@ const listMeasures = () => {
 	}
 }
 
+const insertRecipe = (recipe, idMenu) => {
+	const idProduct = recipe.product.id
+	const idMeasure = recipe.quantity.measure.code
+	const quantity = recipe.quantity.value
+
+	return {
+		name: 'SP_INSERTAR_RECETA',
+		statements: [`CALL SP_INSERTAR_RECETA(${idMenu}, ${idProduct}, ${idMeasure}, ${quantity});`],
+		values: []
+	}
+}
+
+const updateRecipe = (recipe, idRecipe) => {
+	const idProduct = recipe.product.id
+	const idMeasure = recipe.quantity.measure.code
+	const quantity = recipe.quantity.value
+
+	return {
+		name: 'SP_MODIFICAR_RECETA',
+		statements: [`CALL SP_MODIFICAR_RECETA(${idRecipe}, ${idProduct}, ${idMeasure}, ${quantity});`],
+		values: []
+	}
+}
+
+const deleteRecipe = (idRecipe) => {
+	return {
+		name: 'SP_ELIMINAR_RECETA',
+		statements: [`CALL SP_ELIMINAR_RECETA(${idRecipe});`],
+		values: []
+	}
+}
+
 module.exports = {
 	listCategories,
 	insertMenu,
@@ -80,5 +112,8 @@ module.exports = {
 	listMenuById,
 	updateMenu,
 	deleteMenu,
-	listMeasures
+	listMeasures,
+	insertRecipe,
+	updateRecipe,
+	deleteRecipe
 }

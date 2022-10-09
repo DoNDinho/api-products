@@ -8,6 +8,7 @@ const healthRoute = require('./client/routes/health')
 const categoriesRoutes = require('./client/routes/categories.routes')
 const menuRoutes = require('./client/routes/menu.routes')
 const measureRoutes = require('./client/routes/measures.routes')
+const recipesRoutes = require('./client/routes/recipes.routes')
 const { errorHandler } = require('./client/middlewares/error-handler/error-handler')
 const port = process.env.PORT
 
@@ -23,6 +24,7 @@ app.use(healthRoute)
 app.use(categoriesRoutes)
 app.use(menuRoutes)
 app.use(measureRoutes)
+app.use(recipesRoutes)
 
 app.use(async (err, req, res, next) => {
 	await errorHandler(err, res)
