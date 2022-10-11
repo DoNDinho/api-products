@@ -105,6 +105,50 @@ const deleteRecipe = (idRecipe) => {
 	}
 }
 
+const insertProduct = (product) => {
+	const name = product.name
+	const stock = product.stock
+	return {
+		name: 'SP_INSERTAR_PRODUCTO',
+		statements: [`CALL SP_INSERTAR_PRODUCTO("${name}", ${stock});`],
+		values: []
+	}
+}
+
+const listProducts = () => {
+	return {
+		name: 'SP_LISTAR_PRODUCTO',
+		statements: [`CALL SP_LISTAR_PRODUCTO();`],
+		values: []
+	}
+}
+
+const listProductById = (id) => {
+	return {
+		name: 'SP_LISTAR_PRODUCTO_POR_ID',
+		statements: [`CALL SP_LISTAR_PRODUCTO_POR_ID(${id});`],
+		values: []
+	}
+}
+
+const updateProduct = (product, id) => {
+	const name = product.name
+	const stock = product.stock
+	return {
+		name: 'SP_MODIFICAR_PRODUCTO',
+		statements: [`CALL SP_MODIFICAR_PRODUCTO(${id}, "${name}", ${stock});`],
+		values: []
+	}
+}
+
+const deleteProduct = (id) => {
+	return {
+		name: 'SP_ELIMINAR_PRODUCTO',
+		statements: [`CALL SP_ELIMINAR_PRODUCTO(${id});`],
+		values: []
+	}
+}
+
 module.exports = {
 	listCategories,
 	insertMenu,
@@ -115,5 +159,10 @@ module.exports = {
 	listMeasures,
 	insertRecipe,
 	updateRecipe,
-	deleteRecipe
+	deleteRecipe,
+	insertProduct,
+	listProducts,
+	listProductById,
+	updateProduct,
+	deleteProduct
 }

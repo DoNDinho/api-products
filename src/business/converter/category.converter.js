@@ -2,7 +2,8 @@
 const parseCategoriesResponse = (categoryData) => {
 	return {
 		code: categoryData.ID_CATEGORIA,
-		name: categoryData.DESCRIPCION
+		name: categoryData.DESCRIPCION,
+		image: categoryData.IMAGEN ?? null
 	}
 }
 
