@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post(`/Products/v1/products`, async (req, res, next) => {
 	try {
-		await insertProductService.execute(req.body.menu)
+		await insertProductService.execute(req.body.product)
 		const message = 'Producto registrado con exito'
 		const response = { message }
 		logger.info({ message, data: JSON.stringify(response) })
@@ -43,7 +43,7 @@ router.get('/Products/v1/products/:id', async (req, res, next) => {
 
 router.patch('/Products/v1/products/:id', async (req, res, next) => {
 	try {
-		await updateProductService.execute(req.body.menu, req.params.id)
+		await updateProductService.execute(req.body.product, req.params.id)
 		const message = 'Producto modificado con exito'
 		const response = { message }
 		logger.info({ message, data: JSON.stringify(response) })
