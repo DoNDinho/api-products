@@ -7,62 +7,63 @@ const updateMenuService = require('../../business/services/menu/update-menu.serv
 const router = express.Router()
 
 router.post(`/Products/v1/menu`, async (req, res, next) => {
-	try {
-		await insertMenuService.execute(req.body.menu)
-		const message = 'Menu registrado con exito'
-		const response = { message }
-		logger.info({ message, data: JSON.stringify(response) })
-		res.status(201).json(response)
-	} catch (error) {
-		console.log('error: ', error.message)
-		next(error)
-	}
+  try {
+    await insertMenuService.execute(req.body.menu)
+    const message = 'Menu registrado con exito'
+    const response = { message }
+    logger.info({ message, data: JSON.stringify(response) })
+    res.status(201).json(response)
+  } catch (error) {
+    console.log('error: ', error.message)
+    next(error)
+  }
 })
 
 router.get('/Products/v1/menu', async (req, res, next) => {
-	try {
-		const menu = await listMenuService.execute()
-		const response = { menu }
-		logger.info({ message: 'Menu obtenido', data: JSON.stringify(response) })
-		res.json(response)
-	} catch (error) {
-		next(error)
-	}
+  try {
+    const categoryId = req.query.category ? parseInt(req.query.category) : null
+    const menu = await listMenuService.execute(categoryId)
+    const response = { menu }
+    logger.info({ message: 'Menu obtenido', data: JSON.stringify(response) })
+    res.json(response)
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.get('/Products/v1/menu/:id', async (req, res, next) => {
-	try {
-		const menu = await listMenuByIdService.execute(req.params.id)
-		const response = { menu }
-		logger.info({ message: 'Menu obtenido', data: JSON.stringify(response) })
-		res.json(response)
-	} catch (error) {
-		next(error)
-	}
+  try {
+    const menu = await listMenuByIdService.execute(req.params.id)
+    const response = { menu }
+    logger.info({ message: 'Menu obtenido', data: JSON.stringify(response) })
+    res.json(response)
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.patch('/Products/v1/menu/:id', async (req, res, next) => {
-	try {
-		await updateMenuService.execute(req.body.menu, req.params.id)
-		const message = 'Menu modificado con exito'
-		const response = { message }
-		logger.info({ message, data: JSON.stringify(response) })
-		res.json(response)
-	} catch (error) {
-		next(error)
-	}
+  try {
+    await updateMenuService.execute(req.body.menu, req.params.id)
+    const message = 'Menu modificado con exito'
+    const response = { message }
+    logger.info({ message, data: JSON.stringify(response) })
+    res.json(response)
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.delete('/Products/v1/menu/:id', async (req, res, next) => {
-	try {
-		await deleteMenuService.execute(req.params.id)
-		const message = 'Menu eliminado con exito'
-		const response = { message }
-		logger.info({ message, data: JSON.stringify(response) })
-		res.json(response)
-	} catch (error) {
-		next(error)
-	}
+  try {
+    await deleteMenuService.execute(req.params.id)
+    const message = 'Menu eliminado con exito'
+    const response = { message }
+    logger.info({ message, data: JSON.stringify(response) })
+    res.json(response)
+  } catch (error) {
+    next(error)
+  }
 })
 
 module.exports = router
