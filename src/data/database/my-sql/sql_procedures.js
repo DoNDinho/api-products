@@ -1,168 +1,174 @@
 'use strict'
 const listCategories = () => {
-	return {
-		name: 'SP_LISTAR_ROLES',
-		statements: [`CALL SP_LISTAR_CATEGORIAS();`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_ROLES',
+    statements: [`CALL SP_LISTAR_CATEGORIAS();`],
+    values: []
+  }
 }
 
 const insertMenu = (menu, image) => {
-	const idCategory = menu.category.code
-	const name = menu.name
-	const description = menu.description
-	const amount = menu.price.amount
-	const imageData = image ? `"${image}"` : 'NULL'
-	const isAvailable = menu.is_available
+  const idCategory = menu.category.code
+  const name = menu.name
+  const description = menu.description
+  const amount = menu.price.amount
+  const imageData = image ? `"${image}"` : 'NULL'
+  const preparationTime = menu.preparation_time
+  const isAvailable = menu.is_available
 
-	return {
-		name: 'SP_INSERTAR_MENU',
-		statements: [
-			`CALL SP_INSERTAR_MENU(${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${isAvailable});`
-		],
-		values: []
-	}
+  return {
+    name: 'SP_INSERTAR_MENU',
+    statements: [
+      `CALL SP_INSERTAR_MENU(${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${preparationTime}, ${isAvailable});`
+    ],
+    values: []
+  }
 }
 
 const listMenu = () => {
-	return {
-		name: 'SP_LISTAR_MENU',
-		statements: [`CALL SP_LISTAR_MENU();`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_MENU',
+    statements: [`CALL SP_LISTAR_MENU();`],
+    values: []
+  }
 }
 
 const listMenuById = (id) => {
-	return {
-		name: 'SP_LISTAR_MENU_POR_ID',
-		statements: [`CALL SP_LISTAR_MENU_POR_ID(${id});`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_MENU_POR_ID',
+    statements: [`CALL SP_LISTAR_MENU_POR_ID(${id});`],
+    values: []
+  }
 }
 
 const updateMenu = (menu, id, image) => {
-	const idCategory = menu.category.code
-	const name = menu.name
-	const description = menu.description
-	const amount = menu.price.amount
-	const imageData = image ? `"${image}"` : 'NULL'
-	const isAvailable = menu.is_available
+  const idCategory = menu.category.code
+  const name = menu.name
+  const description = menu.description
+  const amount = menu.price.amount
+  const imageData = image ? `"${image}"` : 'NULL'
+  const isAvailable = menu.is_available
+  const preparationTime = menu.preparation_time
 
-	return {
-		name: 'SP_MODIFICAR_MENU',
-		statements: [
-			`CALL SP_MODIFICAR_MENU(${id}, ${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${isAvailable});`
-		],
-		values: []
-	}
+  return {
+    name: 'SP_MODIFICAR_MENU',
+    statements: [
+      `CALL SP_MODIFICAR_MENU(${id}, ${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${preparationTime}, ${isAvailable});`
+    ],
+    values: []
+  }
 }
 
 const deleteMenu = (id) => {
-	return {
-		name: 'SP_ELIMINAR_MENU',
-		statements: [`CALL SP_ELIMINAR_MENU(${id});`],
-		values: []
-	}
+  return {
+    name: 'SP_ELIMINAR_MENU',
+    statements: [`CALL SP_ELIMINAR_MENU(${id});`],
+    values: []
+  }
 }
 
 const listMeasures = () => {
-	return {
-		name: 'SP_LISTAR_MEDIDAS',
-		statements: [`CALL SP_LISTAR_MEDIDAS();`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_MEDIDAS',
+    statements: [`CALL SP_LISTAR_MEDIDAS();`],
+    values: []
+  }
 }
 
 const insertRecipe = (recipe, idMenu) => {
-	const idProduct = recipe.product.id
-	const idMeasure = recipe.quantity.measure.code
-	const quantity = recipe.quantity.value
+  const idProduct = recipe.product.id
+  const idMeasure = recipe.quantity.measure.code
+  const quantity = recipe.quantity.value
 
-	return {
-		name: 'SP_INSERTAR_RECETA',
-		statements: [`CALL SP_INSERTAR_RECETA(${idMenu}, ${idProduct}, ${idMeasure}, ${quantity});`],
-		values: []
-	}
+  return {
+    name: 'SP_INSERTAR_RECETA',
+    statements: [
+      `CALL SP_INSERTAR_RECETA(${idMenu}, ${idProduct}, ${idMeasure}, ${quantity});`
+    ],
+    values: []
+  }
 }
 
 const updateRecipe = (recipe, idRecipe) => {
-	const idProduct = recipe.product.id
-	const idMeasure = recipe.quantity.measure.code
-	const quantity = recipe.quantity.value
+  const idProduct = recipe.product.id
+  const idMeasure = recipe.quantity.measure.code
+  const quantity = recipe.quantity.value
 
-	return {
-		name: 'SP_MODIFICAR_RECETA',
-		statements: [`CALL SP_MODIFICAR_RECETA(${idRecipe}, ${idProduct}, ${idMeasure}, ${quantity});`],
-		values: []
-	}
+  return {
+    name: 'SP_MODIFICAR_RECETA',
+    statements: [
+      `CALL SP_MODIFICAR_RECETA(${idRecipe}, ${idProduct}, ${idMeasure}, ${quantity});`
+    ],
+    values: []
+  }
 }
 
 const deleteRecipe = (idRecipe) => {
-	return {
-		name: 'SP_ELIMINAR_RECETA',
-		statements: [`CALL SP_ELIMINAR_RECETA(${idRecipe});`],
-		values: []
-	}
+  return {
+    name: 'SP_ELIMINAR_RECETA',
+    statements: [`CALL SP_ELIMINAR_RECETA(${idRecipe});`],
+    values: []
+  }
 }
 
 const insertProduct = (product) => {
-	const name = product.name
-	const stock = product.stock
-	return {
-		name: 'SP_INSERTAR_PRODUCTO',
-		statements: [`CALL SP_INSERTAR_PRODUCTO("${name}", ${stock});`],
-		values: []
-	}
+  const name = product.name
+  const stock = product.stock
+  return {
+    name: 'SP_INSERTAR_PRODUCTO',
+    statements: [`CALL SP_INSERTAR_PRODUCTO("${name}", ${stock});`],
+    values: []
+  }
 }
 
 const listProducts = () => {
-	return {
-		name: 'SP_LISTAR_PRODUCTO',
-		statements: [`CALL SP_LISTAR_PRODUCTO();`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_PRODUCTO',
+    statements: [`CALL SP_LISTAR_PRODUCTO();`],
+    values: []
+  }
 }
 
 const listProductById = (id) => {
-	return {
-		name: 'SP_LISTAR_PRODUCTO_POR_ID',
-		statements: [`CALL SP_LISTAR_PRODUCTO_POR_ID(${id});`],
-		values: []
-	}
+  return {
+    name: 'SP_LISTAR_PRODUCTO_POR_ID',
+    statements: [`CALL SP_LISTAR_PRODUCTO_POR_ID(${id});`],
+    values: []
+  }
 }
 
 const updateProduct = (product, id) => {
-	const name = product.name
-	const stock = product.stock
-	return {
-		name: 'SP_MODIFICAR_PRODUCTO',
-		statements: [`CALL SP_MODIFICAR_PRODUCTO(${id}, "${name}", ${stock});`],
-		values: []
-	}
+  const name = product.name
+  const stock = product.stock
+  return {
+    name: 'SP_MODIFICAR_PRODUCTO',
+    statements: [`CALL SP_MODIFICAR_PRODUCTO(${id}, "${name}", ${stock});`],
+    values: []
+  }
 }
 
 const deleteProduct = (id) => {
-	return {
-		name: 'SP_ELIMINAR_PRODUCTO',
-		statements: [`CALL SP_ELIMINAR_PRODUCTO(${id});`],
-		values: []
-	}
+  return {
+    name: 'SP_ELIMINAR_PRODUCTO',
+    statements: [`CALL SP_ELIMINAR_PRODUCTO(${id});`],
+    values: []
+  }
 }
 
 module.exports = {
-	listCategories,
-	insertMenu,
-	listMenu,
-	listMenuById,
-	updateMenu,
-	deleteMenu,
-	listMeasures,
-	insertRecipe,
-	updateRecipe,
-	deleteRecipe,
-	insertProduct,
-	listProducts,
-	listProductById,
-	updateProduct,
-	deleteProduct
+  listCategories,
+  insertMenu,
+  listMenu,
+  listMenuById,
+  updateMenu,
+  deleteMenu,
+  listMeasures,
+  insertRecipe,
+  updateRecipe,
+  deleteRecipe,
+  insertProduct,
+  listProducts,
+  listProductById,
+  updateProduct,
+  deleteProduct
 }
