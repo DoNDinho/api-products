@@ -114,9 +114,13 @@ const deleteRecipe = (idRecipe) => {
 const insertProduct = (product) => {
   const name = product.name
   const stock = product.stock
+  const measureCode = product.measure.code
+  const minimumStock = product.minimum_stock
   return {
     name: 'SP_INSERTAR_PRODUCTO',
-    statements: [`CALL SP_INSERTAR_PRODUCTO("${name}", ${stock});`],
+    statements: [
+      `CALL SP_INSERTAR_PRODUCTO(${measureCode}, "${name}", ${stock}, ${minimumStock});`
+    ],
     values: []
   }
 }
@@ -140,9 +144,13 @@ const listProductById = (id) => {
 const updateProduct = (product, id) => {
   const name = product.name
   const stock = product.stock
+  const measureCode = product.measure.code
+  const minimumStock = product.minimum_stock
   return {
     name: 'SP_MODIFICAR_PRODUCTO',
-    statements: [`CALL SP_MODIFICAR_PRODUCTO(${id}, "${name}", ${stock});`],
+    statements: [
+      `CALL SP_MODIFICAR_PRODUCTO(${id}, ${measureCode}, "${name}", ${stock}, ${minimumStock});`
+    ],
     values: []
   }
 }
