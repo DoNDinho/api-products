@@ -7,19 +7,18 @@ const listCategories = () => {
   }
 }
 
-const insertMenu = (menu, image) => {
+const insertMenu = (menu) => {
   const idCategory = menu.category.code
   const name = menu.name
   const description = menu.description
   const amount = menu.price.amount
-  const imageData = image ? `"${image}"` : 'NULL'
   const preparationTime = menu.preparation_time
   const isAvailable = menu.is_available
 
   return {
     name: 'SP_INSERTAR_MENU',
     statements: [
-      `CALL SP_INSERTAR_MENU(${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${preparationTime}, ${isAvailable});`
+      `CALL SP_INSERTAR_MENU(${idCategory}, "${name}", "${description}", ${amount}, ${preparationTime}, ${isAvailable});`
     ],
     values: []
   }
