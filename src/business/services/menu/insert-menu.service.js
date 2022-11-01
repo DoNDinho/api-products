@@ -1,10 +1,12 @@
 'use strict'
 const menuRepository = require('../../../data/repository/menu.repository')
+const imageService = require('../images/image.service')
 
 const execute = async (menu) => {
   try {
-    // TODO agregar llamado a blob storage para guardar imagen
-    await insertMenu(menu)
+    const menuData = await insertMenu(menu)
+    const name = 'menu'
+    // imageService.execute(menuData[0].ID_MENU, name, menu.image)
   } catch (error) {
     throw error
   }

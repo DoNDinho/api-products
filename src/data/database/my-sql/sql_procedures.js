@@ -24,6 +24,14 @@ const insertMenu = (menu) => {
   }
 }
 
+const uploadImage = (id, image) => {
+  return {
+    name: 'SP_CARGAR_IMAGEN_MENU',
+    statements: [`CALL SP_CARGAR_IMAGEN_MENU(${id}, "${image}");`],
+    values: []
+  }
+}
+
 const listMenu = () => {
   return {
     name: 'SP_LISTAR_MENU',
@@ -164,6 +172,7 @@ const deleteProduct = (id) => {
 
 module.exports = {
   listCategories,
+  uploadImage,
   insertMenu,
   listMenu,
   listMenuById,

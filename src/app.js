@@ -17,8 +17,8 @@ const app = express()
 
 // Configurando middlewares
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }))
+app.use(bodyParser.json({ limit: '5mb' }))
 
 // Configurando rutas
 app.use(healthRoute)
@@ -29,10 +29,10 @@ app.use(recipesRoutes)
 app.use(productsRoutes)
 
 app.use(async (err, req, res, next) => {
-	await errorHandler(err, res)
+  await errorHandler(err, res)
 })
 
 // Iniciando servidor
 app.listen(port, () => {
-	logger.info('Servidor en puerto', port)
+  logger.info('Servidor en puerto', port)
 })
