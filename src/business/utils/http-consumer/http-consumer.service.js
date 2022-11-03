@@ -11,14 +11,14 @@ const get = async (serviceData) => {
 const post = async (serviceData) => {
   const { url, headers, body } = serviceData
   const config = { headers }
-  const func = async () => await axios.post(url, { body }, config)
+  const func = async () => await axios.post(url, body, config)
   return consume(func, serviceData)
 }
 
 const consume = async (func, serviceData) => {
   const { url, body } = serviceData
   try {
-    console.log(`Se consume la API ${url}`, { body })
+    console.log(`Se consume la API ${url}`)
     const response = await func()
     console.log(`Respuesta de la API ${url}`, { response: response.data })
     return response.data

@@ -6,7 +6,7 @@ const execute = async (menu) => {
   try {
     const menuData = await insertMenu(menu)
     const name = 'menu'
-    // imageService.execute(menuData[0].ID_MENU, name, menu.image)
+    imageService.execute(menuData[0].ID_MENU, name, menu.image)
   } catch (error) {
     throw error
   }

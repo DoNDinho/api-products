@@ -6,8 +6,8 @@ const execute = async (id, name, image) => {
   try {
     if (!image) return
     const { image: cleanImage, type } = cleanData(image)
-    const file = await consumeApiFiles(id, name, type, cleanImage)
-    await uploadImage(id, file.url)
+    const fileResponse = await consumeApiFiles(id, name, type, cleanImage)
+    await uploadImage(id, fileResponse.file.url)
   } catch (error) {
     console.log('Error al insertar imagen ', error.message)
   }
@@ -23,7 +23,9 @@ const uploadImage = async (id, image) => {
 }
 
 const cleanData = (image) => {
-  return { image, type: 'png' }
+  const type = image.replace(/^data:image\//, '').split(';')[0]
+  const data = image.replace(`data:image/${type};base64,`, '')
+  return { image: data, type }
 }
 
 const consumeApiFiles = async (id, name, type, image) => {
@@ -39,7 +41,6 @@ const consumeApiFiles = async (id, name, type, image) => {
     }
     return await serviceConsume.post({ url, headers, body })
   } catch (error) {
-    console.log('Error al consumir API files ', error.message)
     throw error
   }
 }
