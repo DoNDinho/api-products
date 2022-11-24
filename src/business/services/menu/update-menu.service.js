@@ -3,16 +3,15 @@ const menuRepository = require('../../../data/repository/menu.repository')
 
 const execute = async (menu, id) => {
 	try {
-		// TODO agregar llamado a blob storage para guardar imagen
-		await updateMenu(menu, parseInt(id), null)
+		await updateMenu(menu, parseInt(id))
 	} catch (error) {
 		throw error
 	}
 }
 
-const updateMenu = async (menu, id, image) => {
+const updateMenu = async (menu, id) => {
 	try {
-		const result = await menuRepository.updateMenu(menu, id, image)
+		const result = await menuRepository.updateMenu(menu, id)
 		return result
 	} catch (error) {
 		throw { httpCode: 422, message: error.message }

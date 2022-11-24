@@ -48,19 +48,18 @@ const listMenuById = (id) => {
   }
 }
 
-const updateMenu = (menu, id, image) => {
+const updateMenu = (menu, id) => {
   const idCategory = menu.category.code
   const name = menu.name
   const description = menu.description
   const amount = menu.price.amount
-  const imageData = image ? `"${image}"` : 'NULL'
   const isAvailable = menu.is_available
   const preparationTime = menu.preparation_time
 
   return {
     name: 'SP_MODIFICAR_MENU',
     statements: [
-      `CALL SP_MODIFICAR_MENU(${id}, ${idCategory}, "${name}", "${description}", ${amount}, ${imageData}, ${preparationTime}, ${isAvailable});`
+      `CALL SP_MODIFICAR_MENU(${id}, ${idCategory}, "${name}", "${description}", ${amount}, ${preparationTime}, ${isAvailable});`
     ],
     values: []
   }

@@ -42,10 +42,10 @@ const listMenuById = async (id) => {
   }
 }
 
-const updateMenu = async (menu, id, image) => {
+const updateMenu = async (menu, id) => {
   try {
     const mySqlClient = await MySqlClient.getInstance()
-    const procedure = sqlProcedures.updateMenu(menu, id, image)
+    const procedure = sqlProcedures.updateMenu(menu, id)
     const sqlRunner = new MySqlRunner(mySqlClient)
     const result = await sqlRunner.runProcedure(procedure)
     console.log(JSON.stringify(result))
