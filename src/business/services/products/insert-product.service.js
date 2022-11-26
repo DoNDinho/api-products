@@ -1,9 +1,11 @@
 'use strict'
 const productRepository = require('../../../data/repository/products.repository')
+const { createAlert } = require('../../../data/repository/alerts.repository')
 
 const execute = async (product) => {
 	try {
 		await insertProduct(product)
+		createAlert()
 	} catch (error) {
 		throw error
 	}
